@@ -148,8 +148,6 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-
-
                     <li>
                         <a href="#"><i class="fa fa-list fa-fw"></i>Categories<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -164,8 +162,6 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-
-
                     <li>
                         <a href="#"><i class="fa fa-newspaper-o fa-fw"></i>Media<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -180,13 +176,6 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-
-
-
-
-
-
-
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -259,11 +248,11 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a class="active" href="blank.html">Blank Page</a>
+                                <a href="blank.html">Blank Page</a>
                             </li>
                             <li>
                                 <a href="login.html">Login Page</a>
