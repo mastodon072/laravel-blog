@@ -23,8 +23,8 @@
         {!! Form::password('password', ['class' => 'form-control'] )!!}
     </div>
     <div class="form-group">
-        {!! Form::label('image', 'Image:' )!!}
-        {!! Form::file('image', ['class' => 'form-control'] )!!}
+        {!! Form::label('image_id', 'Image:' )!!}
+        {!! Form::file('image_id', ['class' => 'form-control'] )!!}
     </div>
     <div class="form-group">
         {!! Form::submit('Add User', ['class' => 'btn btn-primary'] )!!}
