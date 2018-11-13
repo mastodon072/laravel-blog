@@ -1,5 +1,15 @@
 @extends('layouts.admin')
+
 @section('content')
+
+@foreach (['danger', 'warning', 'success', 'info'] as $key)
+    @if(session()->has($key))
+        <div class="alert alert-{{$key}}"> 
+            {!! session($key) !!}
+        </div>
+    @endif
+@endforeach
+
     <h1>Users</h1>
     <table class="table table-bordered">
         <thead>
@@ -34,7 +44,13 @@
                     <td>{{$user->updated_at->diffForHumans() }}</td>
                     <td><a href="{{route("users.show", $user->id)}}">View</a></td>
                     <td><a href="{{route("users.edit", $user->id)}}">Edit</a></td>
-                    <td><a href="{{route("users.destroy", $user->id)}}">Delete</a></td>
+                    <td>
+                        {!!Form::open(['method' => 'DELETE', 'action' => ['AdminUsersController@destroy',$user->id] ])!!}
+
+                        {!!Form::submit('Delete User', ['class' => 'btn btn-danger'])!!}
+
+                        {!!Form::close()!!}
+                    </td>
                 </tr>
             @endforeach
         </tbody>

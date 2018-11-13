@@ -54,6 +54,8 @@ class AdminUsersController extends Controller
             $input['image_id'] = $image->id;
         }
         User::create($input);
+
+        $request->session()->flash('success', 'User is created successfully.');
         return redirect('/admin/users');
     }
 
@@ -104,6 +106,7 @@ class AdminUsersController extends Controller
             $input['image_id'] = $image->id;
         }
         $user->update($input);
+        $request->session()->flash('success', 'User is updated successfully.');
         return redirect('/admin/users');
 
     }
@@ -114,8 +117,10 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        //
+        User::findOrFail($id)->delete();
+        $request->session()->flash('success', 'User is successfully deleted');
+        return redirect(route('users.index'));
     }
 }
