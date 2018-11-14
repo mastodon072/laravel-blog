@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
-use App\Image;
-use App\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Category;
 
-class AdminPostsController extends Controller
+class AdminCategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +14,8 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        return view('admin.posts.index', compact('posts'));
+        $categories = Category::all();
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -28,8 +25,7 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        $categories = Category::pluck('name', 'id')->toArray();
-        return view('admin.posts.create', compact('categories'));
+        return view('admin.categories.create');
     }
 
     /**
@@ -40,21 +36,8 @@ class AdminPostsController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->except('category_id');
-        $input['user_id'] = Auth::user()->id; 
-        if( $file = $request->file('image_id') ){
-            $name = time().$file->getClientOriginalName();
-            $file->move('images', $name);
-            $image = Image::create(['file' => $name]);
-            $input['image_id'] = $image->id;
-        }
-        $post = Post::create($input);
-        if( $category_id  = $request->category_id ){
-            $post->categories()->attach( $category_id );
-        } 
-        $request->session()->flash('success', 'Post is created successfully.');
-
-        return redirect('/admin/posts');
+        Category::create($request->all());
+        return redirect(route('categories.index'));
     }
 
     /**
@@ -65,7 +48,8 @@ class AdminPostsController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('admin.categories.show', compact('category'));
     }
 
     /**
@@ -76,7 +60,8 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.posts.edit');
+        $category = Category::findOrFail($id);
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -88,7 +73,9 @@ class AdminPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->update($request->all());
+        return redirect(route('categories.index'));
     }
 
     /**

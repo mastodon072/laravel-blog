@@ -9,7 +9,7 @@
 @endforeach
 @section('content')
     @component('includes.page-header')
-        All Posts
+        Category: {{$category->name}}
     @endcomponent
     <table class="table table-bordered">
         <thead>
@@ -26,7 +26,7 @@
           </tr>
         </thead>
         <tbody>
-            @foreach ($posts as $post)
+            @foreach ($category->posts as $post)
                 <tr>
                     <td>{{$post->id}}</td>
                     <td>
