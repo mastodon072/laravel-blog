@@ -1,4 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <h1>Edit Post</h1>
+    @component('includes.page-header')
+        Edit Post
+    @endcomponent
 @endsection

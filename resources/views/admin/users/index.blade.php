@@ -9,8 +9,9 @@
         </div>
     @endif
 @endforeach
-
-    <h1>Users</h1>
+    @component('includes.page-header')
+        All Users
+    @endcomponent
     <table class="table table-bordered">
         <thead>
           <tr>

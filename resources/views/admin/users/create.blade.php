@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 @section('content')
-    <h1>Create Users</h1>
+    @component('includes.page-header')
+        Create User
+    @endcomponent
     {!! Form::open(['method'=>'post','action'=>'AdminUsersController@store', 'files' => true]) !!}
     <div class="form-group">
         {!! Form::label('name', 'Name:' )!!}
