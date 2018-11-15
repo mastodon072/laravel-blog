@@ -3,6 +3,9 @@
     @component('includes.page-header')
         Edit Post
     @endcomponent
+    @if ($post->image)
+        <img src="{{$post->image->file}}" alt="Image">
+    @endif
     {!!Form::model($post, ['method' => 'PATCH', 'action' => ['AdminPostsController@update', $post->id], 'files' => true ])!!}
         
         <div class="form-group">
