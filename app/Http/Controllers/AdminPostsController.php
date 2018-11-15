@@ -97,8 +97,18 @@ class AdminPostsController extends Controller
         }else{
             $post = Auth::user()->posts()->find($id); // Get only posts of current user and find
         }
+
+        $input = $request->except('category_id');
+
+        if( $file = $request->file('image_id') ){
+            $name = time().$file->getClientOriginalName();
+            $file->move('images', $name);
+            $image = Image::create(['file' => $name]);
+            $input['image_id'] = $image->id;
+        }
+
         if($post){
-            $post->update($request->except('category_id'));
+            $post->update($input);
             if( $category_id  = $request->category_id ){
                 $post->categories()->sync( $category_id ); // sync category associated to post in pivot table
             } 
