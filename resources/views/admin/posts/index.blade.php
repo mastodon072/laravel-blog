@@ -37,7 +37,7 @@
                         @endif  
                     </td>
                     <td>{{$post->title}}</td>
-                    <td>{{$post->content}}</td>
+                    <td>{{str_limit($post->content, 100, ' (...)')}}</td>
                     <td>
                         @if($post->categories)
                             <ul>

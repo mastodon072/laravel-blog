@@ -17,10 +17,12 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             // $table->integer('category_id')->unsigned()->index(); // We make this many to many relation using pivot table
-            $table->integer('image_id')->unsigned()->index();
+            $table->integer('image_id')->unsigned()->index()->nullable();
             $table->string('title');
             $table->text('content');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
