@@ -16,4 +16,5 @@
         {!!Form::submit('Add Catogory',['class' => 'btn btn-primary'])!!}
     </div>
     {!!Form::close()!!}
+    @include('includes.form-error')
 @endsection

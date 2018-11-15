@@ -16,4 +16,5 @@
         {!!Form::submit('Update Category',['class' => 'btn btn-primary'])!!}
     </div>
     {!!Form::close()!!}
+    @include('includes.form-error')
 @endsection
