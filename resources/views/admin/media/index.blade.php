@@ -22,38 +22,20 @@
           </tr>
         </thead>
         <tbody>
-            @foreach ($posts as $post)
+            @foreach ($images as $image)
                 <tr>
-                    <td>{{$post->id}}</td>
+                    <td>{{$image->id}}</td>
                     <td>
-                        @if($post->image)
-                            <img height="50" src="{{$post->image->file}}" alt="Image">
-                        @else
-                            No Image
-                        @endif  
+                        <img height="50" src="{{$image->file}}" alt="Image">
                     </td>
-                    <td>{{$post->title}}</td>
-                    <td>{{str_limit($post->content, 100, ' (...)')}}</td>
+                    <td>{{$image->file}}</td>
+                    <td>{{$image->created_at->diffForHumans() }}</td>
+                    <td><a href="{{route("medias.show", $image->id)}}">View</a></td>
+                    <td><a href="{{route("medias.edit", $image->id)}}">Edit</a></td>
                     <td>
-                        @if($post->categories)
-                            <ul>
-                                @foreach ($post->categories as $category)
-                                <li>{{$category->name}}</li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    </td>
-                    <td>
-                        {{$post->user->name}}
-                    </td>
-                    <td>{{$post->created_at->diffForHumans() }}</td>
-                    <td>{{$post->updated_at->diffForHumans() }}</td>
-                    <td><a href="{{route("posts.show", $post->id)}}">View</a></td>
-                    <td><a href="{{route("posts.edit", $post->id)}}">Edit</a></td>
-                    <td>
-                        {!!Form::open(['method' => 'DELETE', 'action' => ['AdminPostsController@destroy',$post->id] ])!!}
+                        {!!Form::open(['method' => 'DELETE', 'action' => ['AdminMediasController@destroy',$image->id] ])!!}
 
-                        {!!Form::submit('Delete Post', ['class' => 'btn btn-danger'])!!}
+                        {!!Form::submit('Delete', ['class' => 'btn btn-danger'])!!}
 
                         {!!Form::close()!!}
                     </td>
