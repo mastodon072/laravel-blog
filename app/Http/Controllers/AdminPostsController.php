@@ -6,6 +6,7 @@ use App\Post;
 use App\Image;
 use App\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Auth;
 
 class AdminPostsController extends Controller
@@ -38,7 +39,7 @@ class AdminPostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         $input = $request->except('category_id');
         $input['user_id'] = Auth::user()->id; 
@@ -50,7 +51,7 @@ class AdminPostsController extends Controller
         }
         $post = Post::create($input);
         if( $category_id  = $request->category_id ){
-            $post->categories()->attach( $category_id );
+            $post->categories()->sync( $category_id );
         } 
         $request->session()->flash('success', 'Post is created successfully.');
 
@@ -65,7 +66,8 @@ class AdminPostsController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -76,7 +78,9 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.posts.edit');
+        $post = Post::findOrFail($id);
+        $categories = Category::pluck('name','id')->toArray();
+        return view('admin.posts.edit',compact('post', 'categories'));
     }
 
     /**
@@ -86,9 +90,15 @@ class AdminPostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
-        //
+        $post = Post::find($id);
+        $post->update($request->except('category_id'));
+        if( $category_id  = $request->category_id ){
+            $post->categories()->sync( $category_id );
+        } 
+        $request->session()->flash('success', 'Post is successfully updated');
+        return redirect(route('posts.index'));
     }
 
     /**
@@ -99,6 +109,7 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::findOrFail($id)->delete();
+        return redirect(route('posts.index'));
     }
 }

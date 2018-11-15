@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 
+@section('content')
 @foreach (['danger', 'warning', 'success', 'info'] as $key)
     @if(session()->has($key))
         <div class="alert alert-{{$key}}"> 
@@ -7,7 +8,6 @@
         </div>
     @endif
 @endforeach
-@section('content')
     @component('includes.page-header')
         All Posts
     @endcomponent
