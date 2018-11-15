@@ -92,12 +92,20 @@ class AdminPostsController extends Controller
      */
     public function update(PostRequest $request, $id)
     {
-        $post = Post::find($id);
-        $post->update($request->except('category_id'));
-        if( $category_id  = $request->category_id ){
-            $post->categories()->sync( $category_id );
-        } 
-        $request->session()->flash('success', 'Post is successfully updated');
+        if(Auth::user()->role->name == 'administrator'){ // check if user is admin
+            $post = Post::find($id); // administrator can edit all post
+        }else{
+            $post = Auth::user()->posts()->find($id); // Get only posts of current user and find
+        }
+        if($post){
+            $post->update($request->except('category_id'));
+            if( $category_id  = $request->category_id ){
+                $post->categories()->sync( $category_id ); // sync category associated to post in pivot table
+            } 
+            $request->session()->flash('success', 'Post is successfully updated');
+        }else{
+            $request->session()->flash('danger', 'You don\'t have permission to edit this post');
+        }
         return redirect(route('posts.index'));
     }
 
