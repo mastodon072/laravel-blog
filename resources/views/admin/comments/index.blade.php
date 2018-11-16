@@ -36,8 +36,26 @@
                     <td>{{ $comment->is_active == 1 ? 'Active' : 'Awaiting Moderation' }}</td>
                     <td>{{ $comment->created_at->diffForHumans() }}</td>
                     <td>{{ $comment->updated_at->diffForHumans() }}</td>
-                    <td><a href="{{route("comments.show", $comment->id)}}">View</a></td>
-                    <td><a href="{{route("comments.edit", $comment->id)}}">Edit</a></td>
+                    <td>
+                        @if ($comment->is_active == 0)
+                            {!!Form::open(['method' => 'PATCH', 'action' => ['PostCommentsController@update',$comment->id] ])!!}
+
+                                {!!Form::hidden('is_active',1)!!}
+                            
+                                {!!Form::submit('Approve', ['class' => 'btn btn-primary'])!!}
+
+                            {!!Form::close()!!}
+                        @else
+                            {!!Form::open(['method' => 'PATCH', 'action' => ['PostCommentsController@update',$comment->id] ])!!}
+
+                                {!!Form::hidden('is_active',0)!!}
+                            
+                                {!!Form::submit('Un-Approve', ['class' => 'btn btn-warning'])!!}
+
+                            {!!Form::close()!!}
+                        @endif
+                    </td>
+                    <td><a href="{{route("comments.edit", $comment->id)}}" class="btn btn-info">Edit</a></td>
                     <td>
                         {!!Form::open(['method' => 'DELETE', 'action' => ['PostCommentsController@destroy',$comment->id] ])!!}
 
