@@ -22,7 +22,7 @@
             <th>Author</th>
             <th>Created</th>
             <th>Updated</th>
-            <th colspan="3">Action</th>
+            <th colspan="4" class="text-center">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -52,7 +52,8 @@
                     </td>
                     <td>{{$post->created_at->diffForHumans() }}</td>
                     <td>{{$post->updated_at->diffForHumans() }}</td>
-                    <td><a href="{{route("posts.show", $post->id)}}">View</a></td>
+                    <td><a href="{{route('comments.show',$post->id)}}">View Comments</a></td>
+                    <td><a href="{{route("home.post", $post->id)}}">View</a></td>
                     <td><a href="{{route("posts.edit", $post->id)}}">Edit</a></td>
                     <td>
                         {!!Form::open(['method' => 'DELETE', 'action' => ['AdminPostsController@destroy',$post->id] ])!!}
