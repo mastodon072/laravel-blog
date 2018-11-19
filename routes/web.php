@@ -23,6 +23,8 @@ Route::get('/post/{id}',[ 'as' => 'home.post', 'uses' => 'AdminPostsController@p
 
 Route::post('/comment/add',[ 'as' => 'post.comment', 'uses' => 'PostCommentsController@add']);
 
+Route::post('/reply/add',[ 'as' => 'comment.reply', 'uses' => 'CommentRepliesController@add']);
+
 Route::group(['middleware' => 'admin'], function(){
 
     Route::get('/admin',function(){

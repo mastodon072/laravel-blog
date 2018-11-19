@@ -334,6 +334,7 @@
 
 <!-- jQuery -->
 <script src="{{asset('js/libs.js')}}"></script>
+<script src="{{asset('js/admin-menu.js')}}"></script>
 
 
 @yield('footer')

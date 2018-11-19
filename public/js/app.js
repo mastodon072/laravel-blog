@@ -13906,8 +13906,17 @@ window.Vue = __webpack_require__(36);
 Vue.component('example-component', __webpack_require__(39));
 
 var app = new Vue({
-  el: '#app'
+    el: '#app'
 });
+
+(function ($) {
+    $(document).ready(function () {
+        $('.comment-reply').on('click', function (e) {
+            e.preventDefault();
+            $(this).closest('.media-body').children('.reply-form').toggleClass('hidden');
+        });
+    });
+})(jQuery);
 
 /***/ }),
 /* 13 */

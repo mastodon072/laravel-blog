@@ -69,13 +69,14 @@
 
     <!-- Comment -->
     @foreach ($post->comments->where('is_active', '==', 1) as $comment)
-        <div class="media">
+        <div class="media comment-wrapper">
             <a class="pull-left" href="#">
                 <img class="media-object" src="http://placehold.it/64x64" alt="">
             </a>
             <div class="media-body">
                 <h4 class="media-heading">{{$comment->author}}
                     <small>{{$comment->created_at->diffForHumans()}}</small>
+                    <a class="comment-reply"><i class="fa fa-reply"></i> Reply</a>
                 </h4>
                 {{$comment->body}}
                 @if ($comment->replies)
@@ -94,10 +95,35 @@
                             </div>
                         </div>
                         <!-- End Nested Comment -->
-                        
+
                     @endforeach
 
                 @endif
+                <div class="reply-form hidden">
+                    <h4 class="reply-title">
+                        Your Reply 
+                    </h4>
+                    {!!Form::open(['method' => 'POST', 'action' => 'CommentRepliesController@add'])!!}
+                        <div class="form-group">
+                            @unless (Auth::user())
+                                <div class="form-group">
+                                    {!!Form::label('author','Name')!!}
+                                    {!!Form::text('author', null, ['class' => 'form-control'])!!}
+                                </div>
+                                <div class="form-group">
+                                    {!!Form::label('email','Email')!!}
+                                    {!!Form::email('email', null, ['class' => 'form-control'])!!}
+                                </div>
+                            @endunless
+                            <div class="form-group">
+                                {!!Form::label('body','Comment')!!}
+                                {!!Form::textarea('body', null,['class' => 'form-control', 'rows' => 3] )!!}
+                                {!!Form::hidden('comment_id',$comment->id)!!}
+                            </div>
+                        </div>
+                        {!!Form::submit('Submit ',['class' => 'btn btn-primary'])!!}
+                    {!!Form::close()!!}
+                </div>
                 
             </div>
         </div>

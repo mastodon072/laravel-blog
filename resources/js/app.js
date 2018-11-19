@@ -20,3 +20,12 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 const app = new Vue({
     el: '#app'
 });
+
+(function($){
+    $(document).ready(function(){
+        $('.comment-reply').on('click',function(e){
+            e.preventDefault();
+            $(this).closest('.media-body').children('.reply-form').toggleClass('hidden');
+        })
+    });
+})(jQuery);

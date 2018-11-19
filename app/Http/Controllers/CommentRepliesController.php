@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\CommentReply;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentRepliesController extends Controller
 {
@@ -21,9 +23,23 @@ class CommentRepliesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function add(Request $request)
     {
-        //
+        $user = Auth::user();
+        if($user){
+            $data = [
+                'comment_id'   => $request->comment_id,
+                'author'    => $user->name,
+                'email'     => $user->email,
+                'body'      => $request->body,
+            ];
+            CommentReply::create($data);
+        }else{
+            CommentReply::create($request->all()); // if user is not logged in all fields filled via form
+        }
+        $request->session()->flash('comment_message','Comment reply is submitted successfully and is waiting moderation.');
+
+        return redirect()->back();
     }
 
     /**
