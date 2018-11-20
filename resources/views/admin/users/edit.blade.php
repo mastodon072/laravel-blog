@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 @section('content')
-    <h1>Edit Users</h1>
+    @component('includes.page-header')
+        Edit user
+    @endcomponent
     {!! Form::model($user,['method'=>'PATCH','action'=>['AdminUsersController@update', $user->id], 'files' => true]) !!}
     <div class="row">
         <div class="col-md-3">

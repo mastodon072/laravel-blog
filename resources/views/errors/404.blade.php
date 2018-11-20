@@ -1,1 +1,7 @@
-<h1>Custom 404 page</h1>
+@extends('layout.app')
+
+@section('content')
+    <h1 class="text-center">
+        Oops Page not found.
+    </h1>
+@endsection

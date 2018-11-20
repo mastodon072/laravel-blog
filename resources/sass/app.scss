@@ -17,3 +17,29 @@
     height: auto;
   }
 }
+body
+{
+  &#admin-page{
+    .btn {
+      font-size: 11px;
+      border-radius: 20px;
+      padding: 4px 10px;
+    }
+  }  
+} 
+.media-heading{
+  width: 100%;
+  .comment-reply{
+    float: right;
+    font-size: 13px;
+  }
+  &:hover{
+    cursor: pointer;
+  }
+}
+.reply-form {
+  margin-top: 20px;
+  .hidden{
+    display: none;
+  }
+}

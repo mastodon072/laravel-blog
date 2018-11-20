@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 
-@section('content')
 @foreach (['danger', 'warning', 'success', 'info'] as $key)
     @if(session()->has($key))
         <div class="alert alert-{{$key}}"> 
@@ -8,8 +7,9 @@
         </div>
     @endif
 @endforeach
+@section('content')
     @component('includes.page-header')
-        All Posts
+        Category: {{$category->name}}
     @endcomponent
     <table class="table table-bordered">
         <thead>
@@ -22,11 +22,11 @@
             <th>Author</th>
             <th>Created</th>
             <th>Updated</th>
-            <th colspan="4" class="text-center">Action</th>
+            <th colspan="3">Action</th>
           </tr>
         </thead>
         <tbody>
-            @foreach ($posts as $post)
+            @foreach ($category->posts as $post)
                 <tr>
                     <td>{{$post->id}}</td>
                     <td>
@@ -37,7 +37,7 @@
                         @endif  
                     </td>
                     <td>{{$post->title}}</td>
-                    <td>{{str_limit($post->content, 100, ' (...)')}}</td>
+                    <td>{{$post->content}}</td>
                     <td>
                         @if($post->categories)
                             <ul>
@@ -52,8 +52,7 @@
                     </td>
                     <td>{{$post->created_at->diffForHumans() }}</td>
                     <td>{{$post->updated_at->diffForHumans() }}</td>
-                    <td><a href="{{route('comments.show',$post->id)}}">View Comments</a></td>
-                    <td><a href="{{route("home.post", $post->slug)}}">View</a></td>
+                    <td><a href="{{route("posts.show", $post->id)}}">View</a></td>
                     <td><a href="{{route("posts.edit", $post->id)}}">Edit</a></td>
                     <td>
                         {!!Form::open(['method' => 'DELETE', 'action' => ['AdminPostsController@destroy',$post->id] ])!!}

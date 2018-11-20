@@ -39,4 +39,8 @@ class User extends Authenticatable
 
         return ($this->role->name == 'administrator' && $this->is_active == 1) ? true: false;
     }
+
+    public function posts(){
+        return $this->hasMany('App\Post');
+    }
 }
