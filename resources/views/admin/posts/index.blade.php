@@ -66,4 +66,9 @@
             @endforeach
         </tbody>
     </table>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            {{$posts->render()}}
+        </div>
+    </div>
 @endsection
