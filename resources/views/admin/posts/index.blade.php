@@ -53,7 +53,7 @@
                     <td>{{$post->created_at->diffForHumans() }}</td>
                     <td>{{$post->updated_at->diffForHumans() }}</td>
                     <td><a href="{{route('comments.show',$post->id)}}">View Comments</a></td>
-                    <td><a href="{{route("home.post", $post->slug)}}">View</a></td>
+                    <td><a href="{{route("home.post", $post->id)}}">View</a></td>
                     <td><a href="{{route("posts.edit", $post->id)}}">Edit</a></td>
                     <td>
                         {!!Form::open(['method' => 'DELETE', 'action' => ['AdminPostsController@destroy',$post->id] ])!!}
