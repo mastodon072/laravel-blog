@@ -131,8 +131,8 @@ class AdminPostsController extends Controller
         return redirect(route('posts.index'));
     }
 
-    public function post($id){
-        $post = Post::findOrFail($id);
+    public function post($slug){
+        $post = Post::findBySlugOrFail($slug);
         return view('post', compact('post'));
     }
 }
