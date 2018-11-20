@@ -71,7 +71,7 @@
     @foreach ($post->comments->where('is_active', '==', 1) as $comment)
         <div class="media comment-wrapper">
             <a class="pull-left" href="#">
-                <img class="media-object" src="http://placehold.it/64x64" alt="">
+                <img height="50" class="media-object" src="{{$comment->getGravatar($comment->email)}}" alt="">
             </a>
             <div class="media-body">
                 <h4 class="media-heading">{{$comment->author}}
@@ -85,7 +85,7 @@
                         <!-- Nested Comment -->
                         <div class="media">
                             <a class="pull-left" href="#">
-                                <img class="media-object" src="http://placehold.it/64x64" alt="">
+                                <img height="40" class="media-object" src="{{$comment->getGravatar($reply->email)}}" alt="">
                             </a>
                             <div class="media-body">
                                 <h4 class="media-heading">{{$reply->author}}

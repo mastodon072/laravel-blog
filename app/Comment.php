@@ -20,4 +20,10 @@ class Comment extends Model
     public function post(){
         return $this->belongsTo('App\Post');
     }
+
+    
+    public function getGravatar($email){
+        $hash = md5(strtolower(trim($email)));
+        return 'http://www.gravatar.com/avatar/'.$hash.'?d=mm';
+    }
 }
