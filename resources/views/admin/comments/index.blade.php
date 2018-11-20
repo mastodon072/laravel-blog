@@ -22,7 +22,7 @@
             <th>Status</th>
             <th>Created</th>
             <th>Updated</th>
-            <th colspan="3">Action</th>
+            <th colspan="4">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -36,6 +36,12 @@
                     <td>{{ $comment->is_active == 1 ? 'Active' : 'Awaiting Moderation' }}</td>
                     <td>{{ $comment->created_at->diffForHumans() }}</td>
                     <td>{{ $comment->updated_at->diffForHumans() }}</td>
+                    <td>
+                        @if (count($comment->replies) > 0)
+                        <a href="{{ route('replies.show',$comment->id) }}">View Replies({{count($comment->replies)}})</a>
+                            
+                        @endif
+                    </td>
                     <td>
                         @if ($comment->is_active == 0)
                             {!!Form::open(['method' => 'PATCH', 'action' => ['PostCommentsController@update',$comment->id] ])!!}
