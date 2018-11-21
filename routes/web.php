@@ -25,6 +25,8 @@ Route::post('/comment/add',[ 'as' => 'post.comment', 'uses' => 'PostCommentsCont
 
 Route::post('/reply/add',[ 'as' => 'comment.reply', 'uses' => 'CommentRepliesController@add']);
 
+Route::delete('admin/media/delete','AdminMediasController@deleteMedia');
+
 Route::group(['middleware' => 'admin'], function(){
 
     Route::get('/admin',function(){

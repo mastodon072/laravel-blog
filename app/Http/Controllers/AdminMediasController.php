@@ -30,4 +30,13 @@ class AdminMediasController extends Controller
         $image->delete();
         return redirect(route('medias.index'));
     }
+
+    public function deleteMedia(Request $request){
+        $images = Image::findOrFail($request->cheboxes_array);
+        foreach($images as $image){
+            $image->delete();
+            unlink(public_path().$image->file);
+        }
+        return redirect(route('medias.index'));
+    }
 }
