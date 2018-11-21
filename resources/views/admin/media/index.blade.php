@@ -12,6 +12,8 @@
         All Media
     @endcomponent
     <form action="media/delete" class="from-inline" method="post">
+        <input name="_method" type="hidden" value="DELETE">
+        {{ csrf_field() }}
         <div class="form-group">
             <select name="action" id="action">
                 <option value="delete">Delete</option>
