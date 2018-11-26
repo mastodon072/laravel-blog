@@ -11,10 +11,10 @@
     <!-- /.navbar-header -->
 
     <!-- TOP Navigation -->
-    @include('includes.admin_top_nav');
+    @include('includes.admin_top_nav')
     
     <!-- TOP Navigation -->
-    @include('includes.admin_side_nav');
+    @include('includes.admin_side_nav')
 
     <!-- /.navbar-static-side -->
 </nav>
